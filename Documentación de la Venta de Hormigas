@@ -1,0 +1,50 @@
+mport random
+
+def listafinal():
+    listafinal = []
+    for k in range():
+        listafinal = [[codigo, pecera, maxhormigas, hormigas]]
+        print(listafinal)
+    return listafinal
+
+def granjadehormigas(tag):
+    codigo = []
+
+    for h in range(tag):
+        codigo.append(random.randint(10000, 99999))
+        print(codigo)
+    return codigo
+
+def granjadehormigas2(tamano2):
+    pecera = []  
+
+    for i in range(tamano2):
+        pecera.append(codigo)
+        pecera.append(random.randint(50, 100))
+        print(pecera)
+    return pecera
+
+def granjadehormigas3(tamano3):
+    maxhormigas = []  
+    for j in range(tamano3):
+        maxhormigas.append(random.randint(1, 15))
+        print(maxhormigas)
+    return maxhormigas
+
+def granjadehormigas4(tamano4):
+    hormigas = []  # Inicializamos la lista vacía.
+
+
+    for p in range(tamano4):
+        hormigas.append(random.randint(300, 500))
+        print(hormigas)
+    return hormigas
+
+
+
+# Ejemplo de uso
+codigo = granjadehormigas(1)
+pecera = granjadehormigas2(5)
+maxhormigas = granjadehormigas3(5)
+hormigas = granjadehormigas4(1) 
+listafinal = (1)
