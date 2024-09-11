@@ -1,50 +1,84 @@
-mport random
+import mod
+import random
 
-def listafinal():
-    listafinal = []
-    for k in range():
-        listafinal = [[codigo, pecera, maxhormigas, hormigas]]
-        print(listafinal)
-    return listafinal
+# Función de cuando a son digitos más o menos de 5 digitos
+def Ajuste(x):
+    while x != -1 and (x < 10000 or x > 99999):
+        x = int(input("Ingrese una credencial valida: "))
+    return x
 
-def granjadehormigas(tag):
-    codigo = []
+#Función que genera las ventas con random
+def generarVentas():
+    pecerasl = random.randint(0, 10)
+    pecerasxl = random.randint(0, 10)    
+    pecerasxxl = random.randint(0, 10)    
+    pecerasxxxl = random.randint(0, 10)
+    hormigas= random.randint(50, 500)
+    sedes=random.randint(1,25)
+    pecera1 = 800
+    pecera2 = 1000
+    pecera3 = 1400
+    pecera4 = 2000
+    precioFinal = (pecerasl*(pecera1)) + (pecerasxl * (pecera2)) + (pecerasxxl*(pecera3)) + (pecerasxxxl*(pecera4))
+    return pecerasl, pecerasxl, pecerasxxl, pecerasxxxl, hormigas, precioFinal, sedes
 
-    for h in range(tag):
-        codigo.append(random.randint(10000, 99999))
-        print(codigo)
-    return codigo
+    
+#Función para crear Matriz    
+def CrearMatriz(largo):
+    filas=largo
+    columnas=7
+    matriz=[[0]*columnas for i in range(filas)]
+    return matriz
+    
 
-def granjadehormigas2(tamano2):
-    pecera = []  
-
-    for i in range(tamano2):
-        pecera.append(codigo)
-        pecera.append(random.randint(50, 100))
-        print(pecera)
-    return pecera
-
-def granjadehormigas3(tamano3):
-    maxhormigas = []  
-    for j in range(tamano3):
-        maxhormigas.append(random.randint(1, 15))
-        print(maxhormigas)
-    return maxhormigas
-
-def granjadehormigas4(tamano4):
-    hormigas = []  # Inicializamos la lista vacía.
-
-
-    for p in range(tamano4):
-        hormigas.append(random.randint(300, 500))
-        print(hormigas)
-    return hormigas
-
-
-
-# Ejemplo de uso
-codigo = granjadehormigas(1)
-pecera = granjadehormigas2(5)
-maxhormigas = granjadehormigas3(5)
-hormigas = granjadehormigas4(1) 
-listafinal = (1)
+#Función para rellenar la Matriz con la función generarVentas
+def rellenarMatrices(vendedores):
+    filas=len(vendedores)
+    columnas=7
+    matriz=CrearMatriz(filas)
+    for f in range(filas):  
+        pecerasl, pecerasxl, pecerasxxl, pecerasxxxl, hormigas, precioFinal, sedes=generarVentas()
+        matriz[f][0]=pecerasl
+        matriz[f][1]=pecerasxl
+        matriz[f][2]=pecerasxxl
+        matriz[f][3]=pecerasxxxl
+        matriz[f][4]=hormigas
+        matriz[f][5]=precioFinal
+        matriz[f][6]=sedes
+    return matriz
+    
+#Función imprimirMatriz
+def imprimirMatriz(matriz):
+    filas=len(matriz)
+    columnas=len(matriz[0])
+    print(f"{'Credenciales':>15} {'Peceras L':>20} {'Peceras XL':>20} {'Peceras XXL':>20} {'Peceras XXXL':>20} {'Hormigas':>18} {'Precio Total':>20} {'sedes':>19}")
+    for i in range(filas):
+        print(f"{credenciales[i]:>10}", end=" ")
+        for c in range(columnas):
+            print("%20d" %matriz[i][c],end=" ")
+        print()
+    
+        
+#Programa Principal
+credenciales=[]
+seguir=True
+while seguir==True: 
+    a=int(input("Ingrese una credencial: "))
+    if a==-1:
+        seguir=False #Corroborar si es -1
+    elif a>9999 and a<100000:
+        lista= mod.noRepetir(a, credenciales)
+        if lista== False:
+            credenciales.append(a) #Revisar si está repetido y guardarlo en la lista
+        else:
+            print("Credencial ya registrada. Ingrese una nueva credencial de 5 digitos: ")
+    else:
+        resultadoAjustado=Ajuste(a)
+        if resultadoAjustado!=-1:
+            credenciales.append(resultadoAjustado) #Función y procedimiento para revisar si es menor o mayor a 5 digitos
+        else:
+            seguir=False
+            
+mod.valoresCompletos(credenciales)
+matriz=rellenarMatrices(credenciales)
+imprimirMatriz(matriz)
