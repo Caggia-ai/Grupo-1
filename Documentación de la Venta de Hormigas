@@ -9,17 +9,21 @@ def Ajuste(x):
 
 #Función que genera las ventas con random
 def generarVentas():
+    suma = lambda x, y: x + y
+    multiplicacion = lambda x, y: x * y
+    
     pecerasl = random.randint(0, 10)
     pecerasxl = random.randint(0, 10)    
     pecerasxxl = random.randint(0, 10)    
     pecerasxxxl = random.randint(0, 10)
     hormigas= random.randint(50, 500)
-    sedes=random.randint(1,25)
+    sedes=random.randint(1,13)
     pecera1 = 800
     pecera2 = 1000
     pecera3 = 1400
     pecera4 = 2000
-    precioFinal = (pecerasl*(pecera1)) + (pecerasxl * (pecera2)) + (pecerasxxl*(pecera3)) + (pecerasxxxl*(pecera4))
+    precioFinal = suma(suma(multiplicacion(pecerasl, pecera1),multiplicacion(pecerasxl, pecera2)),suma(multiplicacion(pecerasxxl, pecera3),multiplicacion(pecerasxxxl, pecera4)))
+    
     return pecerasl, pecerasxl, pecerasxxl, pecerasxxxl, hormigas, precioFinal, sedes
 
     
@@ -45,40 +49,56 @@ def rellenarMatrices(vendedores):
         matriz[f][4]=hormigas
         matriz[f][5]=precioFinal
         matriz[f][6]=sedes
+            
     return matriz
     
+    
+
 #Función imprimirMatriz
 def imprimirMatriz(matriz):
     filas=len(matriz)
     columnas=len(matriz[0])
-    print(f"{'Credenciales':>15} {'Peceras L':>20} {'Peceras XL':>20} {'Peceras XXL':>20} {'Peceras XXXL':>20} {'Hormigas':>18} {'Precio Total':>20} {'sedes':>19}")
+    print(f"{'Credenciales':>15} {'Peceras L':>20} {'Peceras XL':>20} {'Peceras XXL':>20} {'Peceras XXXL':>20} {'Hormigas':>18} {'Ganancias':>20} {'sedes':>19}")
     for i in range(filas):
         print(f"{credenciales[i]:>10}", end=" ")
         for c in range(columnas):
             print("%20d" %matriz[i][c],end=" ")
         print()
+        
+def encontrarMayorGanancia(matriz, credenciales):
+    max_ganancia = 0
+    indice_max =0
+    for i in range(len(matriz)):
+        if matriz[i][5] > max_ganancia:
+            max_ganancia = matriz[i][5]
+            indice_max = i
+    return credenciales[indice_max], max_ganancia
     
         
 #Programa Principal
 credenciales=[]
-seguir=True
-while seguir==True: 
-    a=int(input("Ingrese una credencial: "))
+seguir="Si"
+while seguir=="Si": 
+    a=int(input("Ingrese la credencial"))
     if a==-1:
-        seguir=False #Corroborar si es -1
+        seguir="No" #Corroborar si es -1
+        
     elif a>9999 and a<100000:
         lista= mod.noRepetir(a, credenciales)
         if lista== False:
             credenciales.append(a) #Revisar si está repetido y guardarlo en la lista
         else:
-            print("Credencial ya registrada. Ingrese una nueva credencial de 5 digitos: ")
+            print("Credencial ya registrada. Ingrese una credencial nueva, de preferencia de 5 digitos")
     else:
         resultadoAjustado=Ajuste(a)
         if resultadoAjustado!=-1:
             credenciales.append(resultadoAjustado) #Función y procedimiento para revisar si es menor o mayor a 5 digitos
         else:
-            seguir=False
+            seguir="No"
             
 mod.valoresCompletos(credenciales)
 matriz=rellenarMatrices(credenciales)
 imprimirMatriz(matriz)
+credencial_max, ganancia_max = encontrarMayorGanancia(matriz, credenciales)
+print()
+print(f"El vendedor con la credencial {credencial_max} generó la mayor ganancia: {ganancia_max}")
