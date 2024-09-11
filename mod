@@ -12,5 +12,3 @@ def valoresCompletos(lista):
         if lista[i]>9999 and lista[i]<100000:
             del lista[i]
     return lista
-
-    
