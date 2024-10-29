@@ -1,15 +1,10 @@
-
-from modulosaux import porcentajes
-
 def porcentajessemanal(ventasvendedor):
     semanasum = [0, 0, 0, 0]  
     for ventas in ventasvendedor.values():  
         for i in range(4): 
             semanasum[i] += ventas[i]
     total_ventas = sum(semanasum) 
-    porcentajes = [((semana / total_ventas) * 100) for semana in semanasum] if total_ventas > 0 else 0  # Evitamos la división por cero
-    
-    # Escribimos los porcentajes en el archivo como un diccionario
+    porcentajes = [((semana / total_ventas) * 100) for semana in semanasum] if total_ventas > 0 else 0
     with open("Porcentaje Semanal.txt", "wt") as archivo2:
         diccionarioporcentaje = {f"Semana{i + 1}": f"{porcentaje:.2f}%" for i, porcentaje in enumerate(porcentajes)}
         archivo2.write(str(diccionarioporcentaje))
@@ -37,7 +32,7 @@ def porcentajeVendedor():
                 resultado[sede]={}
                 for vendedor in vendedores:
                     if vendedor in ventas:
-                        porcentaje=porcentajes(totalSede,ventas[vendedor])
+                        porcentaje=fporcentajes(totalSede,ventas[vendedor])
                         resultado[sede][vendedor]=round(porcentaje, 2)
 
             # Guardar resultados en un archivo de salida
@@ -51,3 +46,8 @@ def porcentajeVendedor():
             archSalida1.write(str(dict_credenciales) + "\n")
     except OSError as msg:
         print("ERROR DE ARCHIVO:", msg)
+
+def fporcentajes(total, parte):
+    if total > 0:
+        return (parte/total) * 100
+    return  0
