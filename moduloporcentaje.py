@@ -35,13 +35,12 @@ def porcentajeVendedor():
                         porcentaje=fporcentajes(totalSede,ventas[vendedor])
                         resultado[sede][vendedor]=round(porcentaje, 2)
 
-            # Guardar resultados en un archivo de salida
             for sede,vendedores in resultado.items():
                 archSalida1.write(f"Sede: {sede}:\n")
                 for vendedor,porcentaje in vendedores.items():
                     archSalida1.write(f"{'Vendedor'.rjust(15)} {vendedor}: {porcentaje:.2f}%\n")
                     
-            archSalida1.write("\n 2do Diccionario: \n")
+            archSalida1.write("\n Diccionario de Vendedores: \n")
             dict_credenciales = {vendedor: round(porcentaje, 2) for sede, vendedores in resultado.items() for vendedor, porcentaje in vendedores.items()}
             archSalida1.write(str(dict_credenciales) + "\n")
     except OSError as msg:
