@@ -1,3 +1,4 @@
+
 def detectarRepetidos(legajo,lista):
     return legajo in lista
 
@@ -12,9 +13,3 @@ def sumaListaRecursiva(lista):
         return 0
     else:
         return lista[0]+sumaListaRecursiva(lista[1:])
-
-
-def porcentajes(total, parte):
-    if total > 0:
-        return (parte/total) * 100
-    return  0
