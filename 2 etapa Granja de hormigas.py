@@ -1,4 +1,5 @@
 import random
+from modulosaux import detectarRepetidos, escribirDocumento, sumaListaRecursiva, porcentajes
 
 def ingresoCredenciales(lista):
     while True:
@@ -25,25 +26,6 @@ def ingresoCredenciales(lista):
         except OSError as msg:
             print("ERROR DE ARCHIVO",msg)
     escribirDocumento(lista)
-
-
-def detectarRepetidos(legajo,lista):
-    return legajo in lista
-
-
-def escribirDocumento(lista):
-    with open("Credenciales.txt","wt") as archivo:
-        for credencial in lista:
-            archivo.write(credencial+"\n")
-
-
-
-def sumaListaRecursiva(lista):
-    if len(lista)==0:
-        return 0
-    else:
-        return lista[0]+sumaListaRecursiva(lista[1:])
-
 
 def ventas():
     ventasvendedor = {}
@@ -93,11 +75,6 @@ def repartirTrabajadores(lista, sedes):
                 documentoSedes.write(str(sede)+"\n")
     except OSError as msg:
         print("ERROR DE ARCHIVO:", msg)
-
-def porcentajes(total, parte):
-    if total > 0:
-        return (parte/total) * 100
-    return  0
 
 def porcentajeVendedor():
     try:
