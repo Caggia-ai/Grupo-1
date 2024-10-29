@@ -1,6 +1,6 @@
 import random
-from modulosaux import detectarRepetidos, escribirDocumento, sumaListaRecursiva, porcentajes
-from moduloporcentaje import porcentajessemanal, porcentajeVendedor
+from modulosaux import detectarRepetidos, escribirDocumento, sumaListaRecursiva
+from moduloporcentaje import porcentajessemanal, porcentajeVendedor, fporcentajes
 
 def ingresoCredenciales(lista):
     while True:
@@ -47,12 +47,12 @@ def ventas():
 def repartirTrabajadores(lista, sedes):
     try:
         with open("Sedes.txt", "wt") as documentoSedes:
-            listaconSedes=[[sede] for sede in sedes] # Permite ordenar las sedes en la lista sedes
-            asignadas=random.sample(lista,len(sedes)) # Agarra la lista de credenciales y utiliza random sample para distribuirlas entre las sedes de manera que no se repitan y tambien sea equitativo
-            for i in range(len(sedes)):                    #-----------------------------
-                listaconSedes[i].append(asignadas[i])         #Se encarga de minimo llenar una credencial por sede
+            listaconSedes=[[sede] for sede in sedes] 
+            asignadas=random.sample(lista,len(sedes)) 
+            for i in range(len(sedes)):                   
+                listaconSedes[i].append(asignadas[i])         
             for credencial in asignadas:
-                lista.remove(credencial)                   # Borra credenciales para que no se repitan
+                lista.remove(credencial)                   
             while lista:
                 sedeRandom=random.choice(sedes)                     
                 indiceSede=sedes.index(sedeRandom)                  
